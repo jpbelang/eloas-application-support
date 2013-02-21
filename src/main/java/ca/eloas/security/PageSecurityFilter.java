@@ -43,7 +43,17 @@ public class PageSecurityFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         String path = req.getServletPath();
-        String[] patterns = configuration.getProperty("protected.admin.pages", "/admin.*").split("\\s+,\\s+");
+
+        String[] patterns = configuration.getProperty("ignore.pages", "/rest.*").split("\\s+,\\s+");
+        for (String pattern : patterns) {
+
+            if ( path.matches(pattern) ) {
+
+                chain.doFilter(request, response);
+            }
+        }
+
+        patterns = configuration.getProperty("protected.admin.pages", "/admin.*").split("\\s+,\\s+");
         for (String pattern : patterns) {
 
             if ( path.matches(pattern) ) {

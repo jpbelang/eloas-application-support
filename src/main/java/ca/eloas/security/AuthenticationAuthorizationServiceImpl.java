@@ -75,6 +75,11 @@ public class AuthenticationAuthorizationServiceImpl implements AuthenticationAut
     public boolean isUserInRoles(String... values) {
 
         AuthInformation ai = getAuthInformation();
+        if ( ai == null ) {
+
+            return false;
+        }
+
         List<String> roles = Arrays.asList(ai.getRoles());
 
         for (String value : values) {
