@@ -8,5 +8,6 @@ import java.security.Principal;
  */
 public interface AuthInformation extends Serializable {
     Principal getPrincipal();
+    String[] getRoles();
     boolean isAdmin();
 }

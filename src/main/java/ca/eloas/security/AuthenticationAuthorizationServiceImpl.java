@@ -7,6 +7,8 @@ import javax.inject.Provider;
 import javax.servlet.http.HttpSession;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author JP
@@ -33,7 +35,7 @@ public class AuthenticationAuthorizationServiceImpl implements AuthenticationAut
         return isAuthenticated() && ( ai != null || (service.isUserLoggedIn() && service.isUserAdmin()));
     }
 
-    private AuthInformation getAuthInformation() {
+    public AuthInformation getAuthInformation() {
         return (AuthInformation) session.get().getAttribute("auth");
     }
 
@@ -67,6 +69,22 @@ public class AuthenticationAuthorizationServiceImpl implements AuthenticationAut
         AuthInformation ai = auth.authenticate();
 
         session.get().setAttribute("auth", ai);
+    }
+
+    @Override
+    public boolean isUserInRoles(String... values) {
+
+        AuthInformation ai = getAuthInformation();
+        List<String> roles = Arrays.asList(ai.getRoles());
+
+        for (String value : values) {
+            if ( roles.contains(value)) {
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public SystemUser getUser() {

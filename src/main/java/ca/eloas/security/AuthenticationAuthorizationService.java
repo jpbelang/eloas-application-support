@@ -13,4 +13,8 @@ public interface AuthenticationAuthorizationService {
 
     URL getLogoutURL();
     void authenticate(Authenticatable auth) throws AuthenticationException;
-}
+    boolean isUserInRoles(String... value);
+
+    public AuthInformation getAuthInformation();
+
+    }

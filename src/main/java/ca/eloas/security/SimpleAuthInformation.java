@@ -27,6 +27,18 @@ public class SimpleAuthInformation implements AuthInformation {
     }
 
     @Override
+    public String[] getRoles() {
+
+        if ( admin == true ) {
+
+            return new String[] {StandardRoles.ADMIN, StandardRoles.USER};
+        } else {
+
+            return new String[] {StandardRoles.USER};
+        }
+    }
+
+    @Override
     public boolean isAdmin() {
         return admin;
     }
