@@ -24,8 +24,8 @@ public class Launcher {
     public Launcher(int port, String[] args)throws Exception{
         this.port = port;
         CommandLine cl = getOptions(args);
-        String webapp = cl.getOptionValue("j", "src/test/webapp/WEB-INF/jetty-web.xml");
-        String jetty = cl.getOptionValue("s", "src/test/webapp/WEB-INF/jetty.xml");
+        String webapp = cl.getOptionValue("j", "src/test/webapp-test/WEB-INF/jetty-web.xml");
+        String jetty = cl.getOptionValue("s", "src/test/webapp-test/WEB-INF/jetty.xml");
         String featuresString = cl.getOptionValue("f", null);
 
         buildServer(jetty, webapp, parseArgs(cl.getArgs()));
