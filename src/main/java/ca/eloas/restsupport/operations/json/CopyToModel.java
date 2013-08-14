@@ -2,6 +2,7 @@ package ca.eloas.restsupport.operations.json;
 
 import ca.eloas.restsupport.ToMessageOperation;
 import ca.eloas.restsupport.ToModelOperation;
+import com.mongodb.DBObject;
 import org.bson.BSONObject;
 import org.bson.BasicBSONObject;
 import org.codehaus.jettison.json.JSONArray;
@@ -14,14 +15,14 @@ import java.util.Map;
 /**
  * @author JP
  */
-public class CopyToModel implements ToModelOperation<BSONObject, JSONObject> {
+public class CopyToModel implements ToModelOperation<DBObject, JSONObject> {
 
     @Inject
     private static JSONOperationFactory factory;
 
 
     @Override
-    public void run(JSONObject jsonObject, BSONObject object) throws Exception {
+    public void run(JSONObject jsonObject, DBObject object) throws Exception {
 
 
         Iterator it = jsonObject.keys();
@@ -31,7 +32,7 @@ public class CopyToModel implements ToModelOperation<BSONObject, JSONObject> {
             if ( field instanceof JSONObject ) {
 
                 object.put(next, new BasicBSONObject());
-                run((JSONObject)field, (BSONObject)object.get(next));
+                run((JSONObject)field, (DBObject)object.get(next));
                 continue;
             }
 

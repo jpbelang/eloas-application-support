@@ -2,6 +2,7 @@ package ca.eloas.restsupport.operations.json;
 
 import ca.eloas.restsupport.ToMessageOperation;
 import com.google.inject.assistedinject.AssistedInject;
+import com.mongodb.DBObject;
 import org.bson.BSONObject;
 import org.bson.BasicBSONObject;
 import org.codehaus.jettison.json.JSONArray;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * @author JP
  */
-public class CopyToMessage implements ToMessageOperation<BSONObject, JSONObject> {
+public class CopyToMessage implements ToMessageOperation<DBObject, JSONObject> {
 
     @Inject
     private static JSONOperationFactory factory;
@@ -26,14 +27,14 @@ public class CopyToMessage implements ToMessageOperation<BSONObject, JSONObject>
 
 
     @Override
-    public void run(BSONObject object, JSONObject jsonObject) throws Exception {
+    public void run(DBObject object, JSONObject jsonObject) throws Exception {
 
 
         Iterator it = object.keySet().iterator();
         while (it.hasNext()) {
             String next = (String) it.next();
             Object field = object.get(next);
-            if ( jsonObject.get(next) instanceof List) {
+            if ( field instanceof List) {
 
                 continue;
             }
@@ -41,12 +42,14 @@ public class CopyToMessage implements ToMessageOperation<BSONObject, JSONObject>
             if ( field instanceof BSONObject ) {
 
                 object.put(next, new BasicBSONObject());
-                run((BSONObject)object.get(next), (JSONObject)field);
+                run((DBObject)object.get(next), (JSONObject)field);
                 continue;
             }
 
 
-            jsonObject.put(next, field);
+            if ( field.getClass().isPrimitive() || field.getClass().equals(String.class) ) {
+                jsonObject.put(next, field);
+            }
         }
 
     }

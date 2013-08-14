@@ -25,8 +25,7 @@ public class JSONObjectList extends JSONObject implements MessageList<JSONObject
 
         this.objects = list;
         try {
-            JSONObject jo = new JSONObject();
-            jo.put("messages", new JSONArray(objects));
+            this.put("messages", new JSONArray(objects));
         } catch(Exception e) {
 
             throw new RuntimeException(e);
