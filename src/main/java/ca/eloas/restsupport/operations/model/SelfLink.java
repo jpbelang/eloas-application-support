@@ -17,7 +17,7 @@ import javax.ws.rs.core.UriInfo;
 public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageOperation<MODEL, LinkedMessage> {
 
     @Inject
-    private static ModelOprationFactory factory;
+    private static ModelOperationFactory factory;
 
     Provider<UriInfo> builderProvider;
     ObjectFactory objectFactory;

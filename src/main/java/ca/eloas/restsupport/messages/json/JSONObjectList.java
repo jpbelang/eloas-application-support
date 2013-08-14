@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author JP
  */
-public class JSONObjectList implements MessageList<JSONObject> {
+public class JSONObjectList extends JSONObject implements MessageList<JSONObject> {
 
     private List<JSONObject> objects = new ArrayList<JSONObject>();
 
@@ -24,14 +24,17 @@ public class JSONObjectList implements MessageList<JSONObject> {
     public void setMessages(List<JSONObject> list) {
 
         this.objects = list;
+        try {
+            JSONObject jo = new JSONObject();
+            jo.put("messages", new JSONArray(objects));
+        } catch(Exception e) {
+
+            throw new RuntimeException(e);
+        }
     }
 
-    public JSONObject asJSONArray() throws JSONException {
+    public JSONObject asJSONObject() throws JSONException {
 
-        JSONObject jo = new JSONObject();
-        jo.put("messages", new JSONArray(objects));
-        jo.put("links", new JSONArray());
-
-        return jo;
+        return new JSONObject(this.toString());
     }
 }

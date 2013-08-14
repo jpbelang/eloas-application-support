@@ -6,7 +6,7 @@ import com.google.inject.assistedinject.Assisted;
 /**
  * @author JP
  */
-public interface ModelOprationFactory {
+public interface ModelOperationFactory {
 
     SelfLink createSelfLink();
     ChildLink createChildLink(@Assisted("one") String name, @Assisted("two")String link);

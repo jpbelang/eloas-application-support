@@ -3,6 +3,7 @@ package ca.eloas.restsupport.requests;
 import ca.eloas.restsupport.ObjectFactory;
 import ca.eloas.restsupport.ToMessageOperation;
 import ca.eloas.restsupport.ToModelOperation;
+import ca.eloas.restsupport.operations.json.AddLink;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
@@ -64,4 +65,6 @@ public class GetRequest<MODEL, MESSAGE> {
     }
 
 
+//    public GetRequest<MODEL, MESSAGE>  runAll(MODEL addLink, MODEL addLink1, MODEL addLink2) {
+//    }
 }

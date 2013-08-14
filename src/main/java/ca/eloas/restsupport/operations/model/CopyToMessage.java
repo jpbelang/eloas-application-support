@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
 public class CopyToMessage implements ToMessageOperation<DBObject, Object> {
 
     @Inject
-    private static ModelOprationFactory factory;
+    private static ModelOperationFactory factory;
 
     @Inject
     ObjectFactory objectFactory;
