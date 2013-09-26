@@ -17,7 +17,6 @@ package ca.eloas.eventbus;
 
 /**
  * Registration returned from a call to
- * {@link HandlerManager#addHandler(com.babeng.event.shared.GwtEvent.Type, EventHandler)}
  * . Use the handler registration to remove handlers when they are no longer
  * needed.
  * 

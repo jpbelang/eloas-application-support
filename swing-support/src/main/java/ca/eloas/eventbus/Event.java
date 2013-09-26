@@ -93,8 +93,7 @@ public abstract class Event<H extends EventHandler> {
 
 	/**
 	 * The toString() for abstract event is overridden to avoid accidently
-	 * including class literals in the the compiled output. Use {@link GwtEvent}
-	 * #toDebugString to get more information about the event.
+	 * including class literals in the the compiled output. .
 	 */
 	@Override
 	public String toString() {
@@ -104,8 +103,7 @@ public abstract class Event<H extends EventHandler> {
 	/**
 	 * Asserts that the event still should be accessed. All events are
 	 * considered to be "dead" after their original handler manager finishes
-	 * firing them. An event can be revived by calling {@link GwtEvent#revive()}
-	 * .
+	 * firing them. An event can be revived by calling
 	 */
 	protected void assertLive() {
 		assert (!dead) : "This event has already finished being processed by its original handler manager, so you can no longer access it";
