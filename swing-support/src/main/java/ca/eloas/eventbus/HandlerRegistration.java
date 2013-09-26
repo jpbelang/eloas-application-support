@@ -16,8 +16,7 @@
 package ca.eloas.eventbus;
 
 /**
- * Registration returned from a call to
- * . Use the handler registration to remove handlers when they are no longer
+ * Use the handler registration to remove handlers when they are no longer
  * needed.
  * 
  * Note, this interface is under the control of the {@link HandlerManager} class
