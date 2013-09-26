@@ -43,7 +43,7 @@ public class BasicResource {
                 .createMessageWith(objectFactory);
     }
 
-    public <MODEL,INPUT, OUTPUT> AsymmetricalPostRequest<MODEL,INPUT, OUTPUT> post(MODEL model, INPUT message, Class<OUTPUT> messageClass) {
+    public <MODEL,INPUT, OUTPUT> AsymmetricalPostRequest<MODEL,INPUT, OUTPUT> postAsymmetrical(MODEL model, INPUT message, Class<OUTPUT> messageClass) {
 
         return factory.createAsymmetricalPostRequest(model, message, messageClass)
                 .createMessageWith(objectFactory);
