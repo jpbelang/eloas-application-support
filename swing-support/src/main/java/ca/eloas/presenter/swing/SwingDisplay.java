@@ -9,11 +9,13 @@ import javax.swing.JComponent;
 
 import ca.eloas.presenter.Display;
 
+import java.awt.*;
+
 /**
  * 
  * @author David Peterson, refactored by Steffen Kaempke
  *
  */
 public interface SwingDisplay extends Display {
-	JComponent asComponent();
+	Component asComponent();
 }

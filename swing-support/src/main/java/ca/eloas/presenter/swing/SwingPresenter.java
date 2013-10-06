@@ -8,6 +8,8 @@ package ca.eloas.presenter.swing;
 import ca.eloas.eventbus.EventBus;
 import ca.eloas.presenter.BasicPresenter;
 
+import javax.swing.*;
+
 /**
  * 
  * @author David Peterson, refactored by Steffen Kaempke
@@ -17,4 +19,5 @@ public abstract class SwingPresenter <D extends SwingDisplay> extends BasicPrese
 	public SwingPresenter(D display, EventBus eventBus) {
         super(display, eventBus);
     }
+
 }

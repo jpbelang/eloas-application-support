@@ -12,6 +12,8 @@ import ca.eloas.presenter.event.PresenterRevealedEvent;
 import ca.eloas.eventbus.EventBus;
 import ca.eloas.eventbus.HandlerRegistration;
 
+import javax.swing.*;
+
 public abstract class BasicPresenter <D extends Display> implements Presenter  {
 	/**
 	 * The display for the presenter.
@@ -114,4 +116,5 @@ public abstract class BasicPresenter <D extends Display> implements Presenter  {
 	public void revealDisplay() {
 		eventBus.fireEvent(new PresenterRevealedEvent(this));
 	}
+
 }

@@ -12,6 +12,8 @@ import ca.eloas.eventbus.EventBus;
 import ca.eloas.presenter.event.PresenterRevealedEvent;
 import ca.eloas.presenter.event.PresenterRevealedHandler;
 
+import javax.swing.*;
+
 /**
  * 
  * @author David Peterson, refactored by Steffen Kaempke
@@ -94,5 +96,11 @@ public abstract class SwingContainerPresenter <T extends SwingContainerDisplay> 
             currentPresenter = presenter;
             display.showComponent(presenter.getDisplay().asComponent());
         }
+    }
+
+    public void insertIn(JFrame mainFrame) {
+
+        mainFrame.add(this.getDisplay().asComponent());
+        //mainFrame.pack();
     }
 }

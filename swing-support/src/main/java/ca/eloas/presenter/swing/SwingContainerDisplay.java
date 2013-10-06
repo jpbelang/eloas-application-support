@@ -6,6 +6,7 @@
 package ca.eloas.presenter.swing;
 
 import javax.swing.JComponent;
+import java.awt.*;
 
 /**
  * 
@@ -17,9 +18,9 @@ public interface SwingContainerDisplay extends SwingDisplay {
     *
     * @param component
     */
-   void showComponent(JComponent component);
+   void showComponent(Component component);
    
-   void addComponent(JComponent component);
+   void addComponent(Component component);
    
-   void removeComponent(JComponent component);
+   void removeComponent(Component component);
 }
