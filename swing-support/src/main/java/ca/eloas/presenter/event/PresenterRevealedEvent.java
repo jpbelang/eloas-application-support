@@ -7,7 +7,7 @@ package ca.eloas.presenter.event;
 
 import ca.eloas.eventbus.Event;
 import ca.eloas.eventbus.EventBus;
-import ca.eloas.presenter.Presenter;
+import ca.eloas.presenter.swing.Presenter;
 
 /**
  * Presenters can send this event to the {@link EventBus} to notify other
