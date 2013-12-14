@@ -17,6 +17,19 @@
     <packaging>pom</packaging>
 
     <name>application-support</name>
+    <distributionManagement>
+        <repository>
+            <id>algo</id>
+            <name>Actimenu Maven repository of releases</name>
+            <url>${repoReleaseUrl}</url>
+        </repository>
+        <snapshotRepository>
+            <id>algo</id>
+            <name>Actimenu Maven repository of snapshots</name>
+            <url>${repoSnapshotUrl}</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <pluginManagement>
