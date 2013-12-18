@@ -27,6 +27,10 @@
             <version>1.0.1.Final</version>
         </dependency>
         <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.web.bindery</groupId>
             <artifactId>requestfactory-client</artifactId>
         </dependency>
