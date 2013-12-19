@@ -1,6 +1,5 @@
 package ca.eloas.modelsupport.json;
 
-import ca.eloas.restsupport.ObjectFactory;
 import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 import com.google.web.bindery.autobean.shared.AutoBeanUtils;
 import com.google.web.bindery.autobean.shared.Splittable;
@@ -8,7 +7,6 @@ import com.google.web.bindery.autobean.vm.AutoBeanFactorySource;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 
-import javax.inject.Inject;
 
 /**
  * @author JP

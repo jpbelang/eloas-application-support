@@ -8,5 +8,5 @@ import com.mongodb.DBObject;
 public interface DBObjectTranslator {
 
     DBObject toDBObject(Object o);
-    <T> Object toObject(Class<T> type, DBObject dbObject);
+    <T> T toObject(Class<T> type, DBObject dbObject);
 }
