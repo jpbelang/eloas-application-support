@@ -17,11 +17,17 @@ public class DBObjectTranslatorImpl implements DBObjectTranslator {
     public DBObject toDBObject(Object o) {
 
         Splittable s = AutoBeanCodex.encode(AutoBeanUtils.getAutoBean(o));
-        return (DBObject) JSON.parse(s.asString());
+        return (DBObject) JSON.parse(s.getPayload());
     }
 
     @Override
     public <T> T toObject(Class<T> type, DBObject dbObject) {
-        return (T) AutoBeanCodex.decode(AutoBeanFactorySource.create(DBObjectAutoBeanFactory.class), type, dbObject.toString()).as();
+
+        if ( dbObject == null ) {
+
+            return null;
+        }
+
+        return AutoBeanCodex.decode(AutoBeanFactorySource.create(DBObjectAutoBeanFactory.class), type, dbObject.toString()).as();
     }
 }
