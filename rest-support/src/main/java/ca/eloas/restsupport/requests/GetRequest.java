@@ -51,6 +51,11 @@ public class GetRequest<MODEL, MESSAGE> {
 
     public MESSAGE now() {
 
+        if ( object == null ) {
+
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
         try {
             MESSAGE message = messageFactory.create(messageClass);
             for (ToMessageOperation<? super MODEL, ? super MESSAGE> operation : operations) {
