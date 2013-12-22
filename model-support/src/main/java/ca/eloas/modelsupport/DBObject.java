@@ -5,5 +5,5 @@ package ca.eloas.modelsupport;
  */
 public interface DBObject<K extends KeyType> {
 
-    K getObjectId();
+    K stableId();
 }

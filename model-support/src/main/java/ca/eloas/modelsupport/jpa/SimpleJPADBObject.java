@@ -1,12 +1,10 @@
 package ca.eloas.modelsupport.jpa;
 
 import ca.eloas.modelsupport.DBObject;
-import ca.eloas.modelsupport.KeyType;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -23,7 +21,7 @@ public class SimpleJPADBObject implements JPADBObject<UUIDKey> {
     @Version
     private long version = -1;
 
-    public UUIDKey getObjectId() {
+    public UUIDKey stableId() {
         return new UUIDKey(UUID.fromString(key));
     }
 
@@ -45,7 +43,7 @@ public class SimpleJPADBObject implements JPADBObject<UUIDKey> {
 
         DBObject that = (DBObject) o;
 
-        if (key != null ? !this.getObjectId().equals(that.getObjectId()) : that.getObjectId() != null) return false;
+        if (key != null ? !this.stableId().equals(that.stableId()) : that.stableId() != null) return false;
 
         return true;
     }

@@ -54,7 +54,7 @@ public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessage
 
         Link link = objectFactory.create(Link.class);
         link.setName(name);
-        link.setURL(builderProvider.get().getRequestUriBuilder().replaceQuery(null).path(object.getObjectId().asString() + this.link).build().toString());
+        link.setURL(builderProvider.get().getRequestUriBuilder().replaceQuery(null).path(object.stableId().asString() + this.link).build().toString());
         linkedMessage.getLinks().add(link);
     }
 

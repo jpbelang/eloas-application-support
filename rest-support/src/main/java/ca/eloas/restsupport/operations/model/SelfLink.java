@@ -49,7 +49,7 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
 
         Link link = objectFactory.create(Link.class);
         link.setName("self");
-        link.setURL(builderProvider.get().getRequestUriBuilder().replaceQuery(null).path(object.getObjectId().asString()).build().toString());
+        link.setURL(builderProvider.get().getRequestUriBuilder().replaceQuery(null).path(object.stableId().asString()).build().toString());
         linkedMessage.getLinks().add(link);
     }
 

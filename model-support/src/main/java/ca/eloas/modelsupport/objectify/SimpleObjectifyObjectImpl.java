@@ -13,14 +13,14 @@ public class SimpleObjectifyObjectImpl<TYPE> implements ObjectifyDBObject<TYPE, 
     public Key<TYPE> getKey() {
 
         if ( getParentKey() == null ) {
-            return (Key<TYPE>) Key.create(this.getClass(), getObjectId().getKey());
+            return (Key<TYPE>) Key.create(this.getClass(), stableId().getKey());
         } else {
 
-            return (Key<TYPE>) Key.create(getParentKey(), this.getClass(), getObjectId().getKey());
+            return (Key<TYPE>) Key.create(getParentKey(), this.getClass(), stableId().getKey());
         }
     }
 
-    public LongKey getObjectId() {
+    public LongKey stableId() {
         return new LongKey(id);
     }
 
