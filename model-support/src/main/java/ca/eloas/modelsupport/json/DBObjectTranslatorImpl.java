@@ -8,6 +8,7 @@ import com.google.web.bindery.autobean.vm.AutoBeanFactorySource;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
+import org.bson.types.ObjectId;
 
 
 /**
@@ -38,4 +39,13 @@ public class DBObjectTranslatorImpl implements DBObjectTranslator {
         t.setTag("id", dbObject.get("_id"));
         return t.as();
     }
+
+    @Override
+    public <T extends MongoDBObject> T createObject(Class<T> type) {
+
+        AutoBean<T> t =  AutoBeanFactorySource.create(DBObjectAutoBeanFactory.class).create(type);
+//        t.setTag("id", new ObjectId(t.as().stableId().asString()));
+        return t.as();
+    }
+
 }
