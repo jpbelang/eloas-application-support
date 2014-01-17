@@ -5,28 +5,31 @@ import ca.eloas.restsupport.utils.CurrentMethod;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
-import javax.servlet.http.HttpServletRequest;
 
 public class MethodSensitiveToMessageOperation<O, M> implements ToMessageOperation<O, M> {
 
+    public static enum Method {
+        GET, POST, PUT, DELETE
+    }
+
     @Inject
-    private Provider<HttpServletRequest> request;
+    private Provider<Method> request;
 
 
     public void run(O one, M two) throws Exception {
 
-        String method = request.get().getMethod();
-        if ("GET".equals(method)) {
+        Method method = request.get();
+        if (method == Method.GET) {
             if (CurrentMethod.get().getAnnotation(LIST.class) == null )
                 runForGet(one, two);
             else
                 runForList(one, two);
 
-        } else if ("POST".equals(method)) {
+        } else if (method == Method.POST) {
             runForPost(one, two);
-        } else if ("PUT".equals(method)) {
+        } else if (method == Method.PUT) {
             runForPut(one, two);
-        } else if ("DELETE".equals(method)) {
+        } else if (method == Method.DELETE) {
             runForDelete(one, two);
         } else {
 

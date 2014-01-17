@@ -9,11 +9,9 @@ import ca.eloas.restsupport.requests.RequestFactory;
 import ca.eloas.restsupport.requests.SymmetricalPostRequest;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * @author JP
@@ -27,9 +25,6 @@ public class BasicResource {
 
     @Inject
     private ObjectFactory objectFactory;
-
-    @Inject
-    private Provider<UriInfo> info;
 
     public <MODEL,MESSAGE> GetRequest<MODEL,MESSAGE> get(MODEL model, Class<MESSAGE> message) {
 
@@ -54,11 +49,6 @@ public class BasicResource {
         return factory.createListRequest(objectList, messageListClass, messageClass)
                 .createMessageWith(objectFactory)
                 .createListWith(objectFactory);
-    }
-
-    protected UriInfo getInfo() {
-
-        return info.get();
     }
 
     protected<M> M createMessage(Class<M> cls) {

@@ -8,7 +8,9 @@ import ca.eloas.restsupport.operations.MethodSensitiveToMessageOperation;
 import com.google.inject.assistedinject.AssistedInject;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Provider;
+import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -19,14 +21,14 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
     @Inject
     private static ModelOperationFactory factory;
 
-    Provider<UriInfo> builderProvider;
+    UriBuilder uriBuilder;
     ObjectFactory objectFactory;
 
     @AssistedInject
-    public SelfLink(ObjectFactory of, Provider<UriInfo> info) {
+    public SelfLink(ObjectFactory of, @Named("request") UriBuilder info) {
 
         this.objectFactory = of;
-        this.builderProvider = info;
+        this.uriBuilder = info;
     }
 
 
@@ -34,7 +36,7 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
     protected void runForPutDeleteAndGet(MODEL object,  LinkedMessage linkedMessage) throws Exception {
         Link link = objectFactory.create(Link.class);
         link.setName("self");
-        link.setURL(builderProvider.get().getRequestUriBuilder().replaceQuery(null).build().toString());
+        link.setURL(uriBuilder.replaceQuery(null).build().toString());
         linkedMessage.getLinks().add(link);
     }
 
@@ -49,7 +51,7 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
 
         Link link = objectFactory.create(Link.class);
         link.setName("self");
-        link.setURL(builderProvider.get().getRequestUriBuilder().replaceQuery(null).path(object.stableId().asString()).build().toString());
+        link.setURL(uriBuilder.replaceQuery(null).path(object.stableId().asString()).build().toString());
         linkedMessage.getLinks().add(link);
     }
 

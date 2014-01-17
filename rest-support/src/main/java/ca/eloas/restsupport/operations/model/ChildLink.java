@@ -9,7 +9,9 @@ import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Provider;
+import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -20,16 +22,16 @@ public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessage
     @Inject
     private static ModelOperationFactory factory;
 
-    Provider<UriInfo> builderProvider;
+    UriBuilder uriBuilder;
     ObjectFactory objectFactory;
     private final String link;
     private final String name;
 
     @AssistedInject
-    public ChildLink(ObjectFactory of, Provider<UriInfo> info, @Assisted("one") String name, @Assisted("two")String link) {
+    public ChildLink(ObjectFactory of, @Named("request") UriBuilder info, @Assisted("one") String name, @Assisted("two")String link) {
 
         this.objectFactory = of;
-        this.builderProvider = info;
+        this.uriBuilder = info;
         this.name = name;
         this.link = link;
     }
@@ -39,7 +41,7 @@ public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessage
     protected void runForPutDeleteAndGet(MODEL object,  LinkedMessage linkedMessage) throws Exception {
         Link link = objectFactory.create(Link.class);
         link.setName(name);
-        link.setURL(builderProvider.get().getRequestUriBuilder().replaceQuery(null).path(this.link).build().toString());
+        link.setURL(uriBuilder.replaceQuery(null).path(this.link).build().toString());
         linkedMessage.getLinks().add(link);
     }
 
@@ -54,7 +56,7 @@ public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessage
 
         Link link = objectFactory.create(Link.class);
         link.setName(name);
-        link.setURL(builderProvider.get().getRequestUriBuilder().replaceQuery(null).path(object.stableId().asString() + this.link).build().toString());
+        link.setURL(uriBuilder.replaceQuery(null).path(object.stableId().asString() + this.link).build().toString());
         linkedMessage.getLinks().add(link);
     }
 

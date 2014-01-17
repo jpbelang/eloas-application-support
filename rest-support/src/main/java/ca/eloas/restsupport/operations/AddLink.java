@@ -8,7 +8,9 @@ import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Provider;
+import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -19,7 +21,7 @@ public class AddLink implements ToMessageOperation<Object, LinkedMessage> {
     @Inject
     private static RestSupportOperationFactory factory;
 
-    Provider<UriInfo> builderProvider;
+    UriBuilder uriBuilder;
     ObjectFactory objectFactory;
 
     private final String target;
@@ -27,10 +29,10 @@ public class AddLink implements ToMessageOperation<Object, LinkedMessage> {
 
 
     @AssistedInject
-    public AddLink(ObjectFactory of, Provider<UriInfo> info, @Assisted("one") String name, @Assisted("two") String target) {
+    public AddLink(ObjectFactory of, @Named("base")UriBuilder info, @Assisted("one") String name, @Assisted("two") String target) {
 
         this.objectFactory = of;
-        this.builderProvider = info;
+        this.uriBuilder = info;
         this.name = name;
         this.target = target;
     }
@@ -39,7 +41,7 @@ public class AddLink implements ToMessageOperation<Object, LinkedMessage> {
 
         Link link = objectFactory.create(Link.class);
         link.setName(name);
-        link.setURL(builderProvider.get().getBaseUriBuilder().path(target).build().toString());
+        link.setURL(uriBuilder.path(target).build().toString());
         linkedMessage.getLinks().add(link);
     }
 

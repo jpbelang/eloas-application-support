@@ -9,6 +9,7 @@ import com.google.inject.assistedinject.AssistedInject;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -19,7 +20,6 @@ public class AddProvidedLink implements ToMessageOperation<Object, LinkedMessage
     @Inject
     private static RestSupportOperationFactory factory;
 
-    Provider<UriInfo> builderProvider;
     ObjectFactory objectFactory;
 
     private final String target;
