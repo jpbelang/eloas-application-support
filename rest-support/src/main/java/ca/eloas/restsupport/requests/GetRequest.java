@@ -19,14 +19,25 @@ public class GetRequest<MODEL, MESSAGE> {
 
     private final Class<MESSAGE> messageClass;
     private final MODEL object;
+    private final boolean checkExists;
     private Iterable<? extends ToMessageOperation<? super MODEL, ? super MESSAGE>> operations;
     private ObjectFactory messageFactory;
     private MESSAGE message;
+
 
     @AssistedInject
     public GetRequest(@Assisted MODEL object, @Assisted Class<MESSAGE> message) {
 
         this.object = object;
+        this.checkExists = true;
+        this.messageClass = message;
+    }
+
+    @AssistedInject
+    public GetRequest(@Assisted Class<MESSAGE> message) {
+
+        this.object = null;
+        this.checkExists = false;
         this.messageClass = message;
     }
 
@@ -51,7 +62,7 @@ public class GetRequest<MODEL, MESSAGE> {
 
     public MESSAGE now() {
 
-        if ( object == null ) {
+        if ( object == null && checkExists == true) {
 
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }

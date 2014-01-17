@@ -12,9 +12,13 @@ public class MethodSensitiveToMessageOperation<O, M> implements ToMessageOperati
         GET, POST, PUT, DELETE
     }
 
-    @Inject
     private Provider<Method> request;
 
+
+    @Inject
+    public MethodSensitiveToMessageOperation(Provider<Method> request) {
+        this.request = request;
+    }
 
     public void run(O one, M two) throws Exception {
 

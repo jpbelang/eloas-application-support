@@ -32,6 +32,12 @@ public class BasicResource {
                 .createMessageWith(objectFactory);
     }
 
+    public <O extends Object ,MESSAGE> GetRequest<Object,MESSAGE> get(Class<MESSAGE> message) {
+
+        return factory.createGetRequest(message)
+                .createMessageWith(objectFactory);
+    }
+
     public <MODEL,MESSAGE> SymmetricalPostRequest<MODEL,MESSAGE> post(MODEL model, MESSAGE message, Class<MESSAGE> messageClass) {
 
         return factory.createPostRequest(model, message, messageClass)

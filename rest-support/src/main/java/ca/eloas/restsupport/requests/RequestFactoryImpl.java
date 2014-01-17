@@ -11,6 +11,11 @@ public class RequestFactoryImpl  implements RequestFactory {
         return new GetRequest<MODEL, MESSAGE>(model, message);
     }
 
+    @Override
+    public <O, MESSAGE> GetRequest<Object, MESSAGE> createGetRequest(Class<MESSAGE> message) {
+        return new GetRequest<Object, MESSAGE>(message);
+    }
+
     public <MODEL, INMESSAGE, OUTMESSAGE> AsymmetricalPostRequest<MODEL, INMESSAGE, OUTMESSAGE> createAsymmetricalPostRequest(MODEL model, INMESSAGE message, Class<OUTMESSAGE> messageClass) {
         return new AsymmetricalPostRequest<MODEL, INMESSAGE, OUTMESSAGE>(model, message, messageClass);
     }

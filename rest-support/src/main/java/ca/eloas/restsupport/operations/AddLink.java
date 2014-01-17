@@ -21,7 +21,7 @@ public class AddLink implements ToMessageOperation<Object, LinkedMessage> {
     @Inject
     private static RestSupportOperationFactory factory;
 
-    UriBuilder uriBuilder;
+    Provider<UriBuilder> uriBuilder;
     ObjectFactory objectFactory;
 
     private final String target;
@@ -29,7 +29,7 @@ public class AddLink implements ToMessageOperation<Object, LinkedMessage> {
 
 
     @AssistedInject
-    public AddLink(ObjectFactory of, @Named("base")UriBuilder info, @Assisted("one") String name, @Assisted("two") String target) {
+    public AddLink(ObjectFactory of, @Named("base")Provider<UriBuilder> info, @Assisted("one") String name, @Assisted("two") String target) {
 
         this.objectFactory = of;
         this.uriBuilder = info;
@@ -41,7 +41,7 @@ public class AddLink implements ToMessageOperation<Object, LinkedMessage> {
 
         Link link = objectFactory.create(Link.class);
         link.setName(name);
-        link.setURL(uriBuilder.path(target).build().toString());
+        link.setURL(uriBuilder.get().path(target).build().toString());
         linkedMessage.getLinks().add(link);
     }
 

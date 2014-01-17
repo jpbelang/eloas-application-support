@@ -24,8 +24,9 @@ public class SelfLink extends MethodSensitiveToMessageOperation<DBObject, JSONOb
     Provider<UriInfo> builderProvider;
 
     @AssistedInject
-    public SelfLink(Provider<UriInfo> info) {
+    public SelfLink(Provider<UriInfo> info, Provider<Method> m) {
 
+        super(m);
         this.builderProvider = info;
     }
 

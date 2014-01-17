@@ -21,12 +21,12 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
     @Inject
     private static ModelOperationFactory factory;
 
-    UriBuilder uriBuilder;
+    Provider<UriBuilder> uriBuilder;
     ObjectFactory objectFactory;
 
     @AssistedInject
-    public SelfLink(ObjectFactory of, @Named("request") UriBuilder info) {
-
+    public SelfLink(ObjectFactory of, @Named("request") Provider<UriBuilder> info, Provider<Method> m) {
+        super(m);
         this.objectFactory = of;
         this.uriBuilder = info;
     }
@@ -36,7 +36,7 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
     protected void runForPutDeleteAndGet(MODEL object,  LinkedMessage linkedMessage) throws Exception {
         Link link = objectFactory.create(Link.class);
         link.setName("self");
-        link.setURL(uriBuilder.replaceQuery(null).build().toString());
+        link.setURL(uriBuilder.get().replaceQuery(null).build().toString());
         linkedMessage.getLinks().add(link);
     }
 
@@ -51,7 +51,7 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
 
         Link link = objectFactory.create(Link.class);
         link.setName("self");
-        link.setURL(uriBuilder.replaceQuery(null).path(object.stableId().asString()).build().toString());
+        link.setURL(uriBuilder.get().replaceQuery(null).path(object.stableId().asString()).build().toString());
         linkedMessage.getLinks().add(link);
     }
 

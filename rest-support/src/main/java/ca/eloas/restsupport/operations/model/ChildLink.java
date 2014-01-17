@@ -22,14 +22,15 @@ public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessage
     @Inject
     private static ModelOperationFactory factory;
 
-    UriBuilder uriBuilder;
+    Provider<UriBuilder> uriBuilder;
     ObjectFactory objectFactory;
     private final String link;
     private final String name;
 
     @AssistedInject
-    public ChildLink(ObjectFactory of, @Named("request") UriBuilder info, @Assisted("one") String name, @Assisted("two")String link) {
+    public ChildLink(ObjectFactory of, @Named("request") Provider<UriBuilder> info, @Assisted("one") String name, @Assisted("two")String link, Provider<Method> m) {
 
+        super(m);
         this.objectFactory = of;
         this.uriBuilder = info;
         this.name = name;
@@ -41,7 +42,7 @@ public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessage
     protected void runForPutDeleteAndGet(MODEL object,  LinkedMessage linkedMessage) throws Exception {
         Link link = objectFactory.create(Link.class);
         link.setName(name);
-        link.setURL(uriBuilder.replaceQuery(null).path(this.link).build().toString());
+        link.setURL(uriBuilder.get().replaceQuery(null).path(this.link).build().toString());
         linkedMessage.getLinks().add(link);
     }
 
@@ -56,7 +57,7 @@ public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessage
 
         Link link = objectFactory.create(Link.class);
         link.setName(name);
-        link.setURL(uriBuilder.replaceQuery(null).path(object.stableId().asString() + this.link).build().toString());
+        link.setURL(uriBuilder.get().replaceQuery(null).path(object.stableId().asString() + this.link).build().toString());
         linkedMessage.getLinks().add(link);
     }
 
