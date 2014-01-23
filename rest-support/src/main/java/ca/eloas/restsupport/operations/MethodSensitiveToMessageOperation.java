@@ -22,6 +22,8 @@ public class MethodSensitiveToMessageOperation<O, M> implements ToMessageOperati
 
     public void run(O one, M two) throws Exception {
 
+        Method m = request.get();
+
         Method method = request.get();
         if (method == Method.GET) {
             if (CurrentMethod.get().getAnnotation(LIST.class) == null )

@@ -12,7 +12,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * @author JP
@@ -63,6 +62,6 @@ public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessage
 
     public static ChildLink childLink(String name, String link) {
 
-        return factory.createChildLink(name, link);
+        return factory.childLink(name, link);
     }
 }

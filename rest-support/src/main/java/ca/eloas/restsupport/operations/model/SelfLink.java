@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * @author JP
@@ -57,6 +56,6 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
 
     public static SelfLink selfLink() {
 
-        return factory.createSelfLink();
+        return factory.selfLink();
     }
 }

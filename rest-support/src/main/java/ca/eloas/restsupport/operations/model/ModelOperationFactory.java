@@ -8,7 +8,7 @@ import com.google.inject.assistedinject.Assisted;
  */
 public interface ModelOperationFactory {
 
-    SelfLink createSelfLink();
-    ChildLink createChildLink(@Assisted("one") String name, @Assisted("two")String link);
+    SelfLink selfLink();
+    ChildLink childLink(@Assisted("one") String name, @Assisted("two") String link);
     CopyToMessage createCopyToMessage();
 }
