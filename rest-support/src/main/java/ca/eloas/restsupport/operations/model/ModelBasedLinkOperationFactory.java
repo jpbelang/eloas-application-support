@@ -6,9 +6,8 @@ import com.google.inject.assistedinject.Assisted;
 /**
  * @author JP
  */
-public interface ModelOperationFactory {
+public interface ModelBasedLinkOperationFactory {
 
     SelfLink selfLink();
     ChildLink childLink(@Assisted("one") String name, @Assisted("two") String link);
-    CopyToMessage createCopyToMessage();
 }
