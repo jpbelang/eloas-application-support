@@ -11,15 +11,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * @author JP
  */
 public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageOperation<MODEL, LinkedMessage> {
-
-    @Inject
-    private static ModelOperationFactory factory;
 
     Provider<UriBuilder> uriBuilder;
     ObjectFactory objectFactory;
@@ -55,8 +51,4 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
         linkedMessage.getLinks().add(link);
     }
 
-    public static SelfLink selfLink() {
-
-        return factory.createSelfLink();
-    }
 }

@@ -17,8 +17,6 @@ import javax.ws.rs.core.UriInfo;
  */
 public class AddProvidedLink implements ToMessageOperation<Object, LinkedMessage> {
 
-    @Inject
-    private static RestSupportOperationFactory factory;
 
     ObjectFactory objectFactory;
 
@@ -40,10 +38,5 @@ public class AddProvidedLink implements ToMessageOperation<Object, LinkedMessage
         link.setName(name);
         link.setURL(target);
         linkedMessage.getLinks().add(link);
-    }
-
-    public static AddProvidedLink addThisLink(String name, String target) {
-
-        return factory.createAddProvidedLink(name, target);
     }
 }

@@ -12,15 +12,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * @author JP
  */
 public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessageOperation<MODEL, LinkedMessage> {
-
-    @Inject
-    private static ModelOperationFactory factory;
 
     Provider<UriBuilder> uriBuilder;
     ObjectFactory objectFactory;
@@ -61,8 +57,4 @@ public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessage
         linkedMessage.getLinks().add(link);
     }
 
-    public static ChildLink childLink(String name, String link) {
-
-        return factory.createChildLink(name, link);
-    }
 }

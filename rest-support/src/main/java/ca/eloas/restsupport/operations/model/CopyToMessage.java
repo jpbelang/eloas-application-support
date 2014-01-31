@@ -18,14 +18,9 @@ import java.lang.reflect.Method;
  */
 public class CopyToMessage implements ToMessageOperation<DBObject, Object> {
 
-    @Inject
-    private static ModelOperationFactory factory;
+    final private ObjectFactory objectFactory;
 
     @Inject
-    ObjectFactory objectFactory;
-
-
-    @AssistedInject
     public CopyToMessage(ObjectFactory of) {
 
         this.objectFactory = of;
@@ -33,7 +28,6 @@ public class CopyToMessage implements ToMessageOperation<DBObject, Object> {
 
     public void run(final DBObject object, final Object message) {
 
-        ModelObjectFactory fac = AutoBeanFactorySource.create(ModelObjectFactory.class);
         AutoBean<Object> bean = AutoBeanUtils.getAutoBean(message);
 
         bean.accept(new AutoBeanVisitor() {
@@ -59,10 +53,5 @@ public class CopyToMessage implements ToMessageOperation<DBObject, Object> {
                 }
             }
         });
-    }
-
-    public static CopyToMessage copyToMessage() {
-
-        return factory.createCopyToMessage();
     }
 }

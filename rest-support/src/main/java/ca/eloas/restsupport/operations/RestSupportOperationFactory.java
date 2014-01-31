@@ -6,6 +6,6 @@ import com.google.inject.assistedinject.Assisted;
  * @author JP
  */
 public interface RestSupportOperationFactory {
-    AddLink createAddLink(@Assisted("one") String name, @Assisted("two") String target);
-    AddProvidedLink createAddProvidedLink(@Assisted("one") String name, @Assisted("two") String target);
+    AddLink addLink(@Assisted("one") String name, @Assisted("two") String target);
+    AddProvidedLink addProvidedLink(@Assisted("one") String name, @Assisted("two") String target);
 }
