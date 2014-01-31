@@ -52,6 +52,8 @@
         <module>rest-support</module>
         <module>security-support</module>
         <module>utilities</module>
+        <module>js/js-rest-messaging</module>
+        <module>js/js-bootpage</module>
     </modules>
 
 </project>
