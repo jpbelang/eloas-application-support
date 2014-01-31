@@ -17,9 +17,6 @@ import javax.ws.rs.core.UriBuilder;
  */
 public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageOperation<MODEL, LinkedMessage> {
 
-    @Inject
-    private static ModelBasedLinkOperationFactory factory;
-
     Provider<UriBuilder> uriBuilder;
     ObjectFactory objectFactory;
 
@@ -54,8 +51,4 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
         linkedMessage.getLinks().add(link);
     }
 
-    public static SelfLink selfLink() {
-
-        return factory.selfLink();
-    }
 }

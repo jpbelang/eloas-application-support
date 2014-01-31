@@ -18,9 +18,6 @@ import javax.ws.rs.core.UriBuilder;
  */
 public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessageOperation<MODEL, LinkedMessage> {
 
-    @Inject
-    private static ModelBasedLinkOperationFactory factory;
-
     Provider<UriBuilder> uriBuilder;
     ObjectFactory objectFactory;
     private final String link;
@@ -60,8 +57,4 @@ public class ChildLink<MODEL extends DBObject> extends  MethodSensitiveToMessage
         linkedMessage.getLinks().add(link);
     }
 
-    public static ChildLink childLink(String name, String link) {
-
-        return factory.childLink(name, link);
-    }
 }
