@@ -54,6 +54,13 @@
         <module>utilities</module>
         <module>js/js-rest-messaging</module>
         <module>js/js-bootpage</module>
+        <module>js/js-logging</module>
+        <module>js/eventbus</module>
+        <module>js/jquery-json</module>
+        <module>js/jquery-bbq</module>
+        <module>js/enter</module>
+
+
     </modules>
 
 </project>

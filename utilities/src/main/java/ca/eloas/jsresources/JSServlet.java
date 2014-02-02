@@ -37,6 +37,10 @@ public class JSServlet extends HttpServlet {
             resp.setHeader("Cache-Control", "max-age="+ 2592000);
 
             String resource = "META-INF/resources/" + new URI(req.getRequestURI()).getPath().substring(req.getContextPath().length() + 1);
+            if ( resource.endsWith(".js")) {
+
+                resp.setContentType("application/x-javascript");
+            }
 
             IO.copy(this.getClass().getClassLoader().getResourceAsStream(resource), resp.getOutputStream());
         } catch (URISyntaxException e) {
