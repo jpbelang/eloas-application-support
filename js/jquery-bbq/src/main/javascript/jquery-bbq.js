@@ -77,6 +77,18 @@
 //         robust test needed to be added.
 // 1.0   - (10/2/2009) Initial release
 
+// Patch for browser sniffing.  If I don't need this library, I should probably flush it.
+// It seems deprecated.
+jQuery.browser = {};
+(function () {
+    jQuery.browser.msie = false;
+    jQuery.browser.version = 0;
+    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        jQuery.browser.msie = true;
+        jQuery.browser.version = RegExp.$1;
+    }
+})();
+
 (function($,window){
     '$:nomunge'; // Used by YUI compressor.
 
