@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -42,7 +43,13 @@ public class JSServlet extends HttpServlet {
                 resp.setContentType("application/x-javascript");
             }
 
-            IO.copy(this.getClass().getClassLoader().getResourceAsStream(resource), resp.getOutputStream());
+            InputStream resourceStream = this.getClass().getClassLoader().getResourceAsStream(resource);
+            if ( resourceStream == null ) {
+
+                throw new ServletException("no such resource: " + resource);
+            }
+
+            IO.copy(resourceStream, resp.getOutputStream());
         } catch (URISyntaxException e) {
             throw new ServletException(e);
         }
