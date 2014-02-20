@@ -43,6 +43,11 @@ public class JSServlet extends HttpServlet {
                 resp.setContentType("application/x-javascript");
             }
 
+            if ( resource.endsWith(".css")) {
+
+                resp.setContentType("text/css");
+            }
+
             InputStream resourceStream = this.getClass().getClassLoader().getResourceAsStream(resource);
             if ( resourceStream == null ) {
 

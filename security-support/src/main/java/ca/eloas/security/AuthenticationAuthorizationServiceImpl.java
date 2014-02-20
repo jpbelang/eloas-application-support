@@ -32,7 +32,7 @@ public class AuthenticationAuthorizationServiceImpl implements AuthenticationAut
 
         AuthInformation ai = getAuthInformation();
 
-        return isAuthenticated() && ( ai != null || (service.isUserLoggedIn() && service.isUserAdmin()));
+        return isAuthenticated() && ai.isAdmin() ||  (service.isUserLoggedIn() && service.isUserAdmin());
     }
 
     public AuthInformation getAuthInformation() {
