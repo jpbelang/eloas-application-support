@@ -1,4 +1,4 @@
-package ca.eloas.restsupport.operations;
+package ca.eloas.restsupport.operations.model;
 
 import ca.eloas.restsupport.ToModelOperation;
 

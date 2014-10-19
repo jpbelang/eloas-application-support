@@ -15,9 +15,6 @@ import javax.inject.Inject;
  */
 public class MongoSave implements ToModelOperation<DBObject, JSONObject> {
 
-    @Inject
-    private static JSONOperationFactory factory;
-
     private DBCollection collection;
 
     @AssistedInject
@@ -30,10 +27,5 @@ public class MongoSave implements ToModelOperation<DBObject, JSONObject> {
 
         collection.save(object);
 
-    }
-
-    public static MongoSave mongoSave(DBCollection c) {
-
-        return factory.createMongoSave(c);
     }
 }

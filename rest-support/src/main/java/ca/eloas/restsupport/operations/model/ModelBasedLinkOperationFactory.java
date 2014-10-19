@@ -8,6 +8,8 @@ import com.google.inject.assistedinject.Assisted;
  */
 public interface ModelBasedLinkOperationFactory {
 
+    AddLink addLink(@Assisted("one") String name, @Assisted("two") String target);
+    AddProvidedLink addProvidedLink(@Assisted("one") String name, @Assisted("two") String target);
     SelfLink selfLink();
     ChildLink childLink(@Assisted("one") String name, @Assisted("two") String link);
 }

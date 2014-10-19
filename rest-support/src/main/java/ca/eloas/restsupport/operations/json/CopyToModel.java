@@ -17,10 +17,6 @@ import java.util.Map;
  */
 public class CopyToModel implements ToModelOperation<DBObject, JSONObject> {
 
-    @Inject
-    private static JSONOperationFactory factory;
-
-
     @Override
     public void run(JSONObject jsonObject, DBObject object) throws Exception {
 
@@ -29,14 +25,14 @@ public class CopyToModel implements ToModelOperation<DBObject, JSONObject> {
         while (it.hasNext()) {
             String next = (String) it.next();
             Object field = jsonObject.get(next);
-            if ( field instanceof JSONObject ) {
+            if (field instanceof JSONObject) {
 
                 object.put(next, new BasicBSONObject());
-                run((JSONObject)field, (DBObject)object.get(next));
+                run((JSONObject) field, (DBObject) object.get(next));
                 continue;
             }
 
-            if ( jsonObject.get(next) instanceof JSONArray) {
+            if (jsonObject.get(next) instanceof JSONArray) {
 
                 continue;
             }
@@ -44,10 +40,5 @@ public class CopyToModel implements ToModelOperation<DBObject, JSONObject> {
             object.put(next, field);
         }
 
-    }
-
-    public static CopyToModel copyToModel() {
-
-        return factory.createCopyToModel();
     }
 }

@@ -17,23 +17,15 @@ import java.util.UUID;
  */
 public class SetId implements ToModelOperation<BSONObject, JSONObject> {
 
-    @Inject
-    private static JSONOperationFactory factory;
-
 
     @AssistedInject
     public SetId() {
 
     }
 
-    public void run(JSONObject linkedMessage, BSONObject object) throws Exception  {
-
+    public void run(JSONObject linkedMessage, BSONObject object) throws Exception {
 
         object.put("id", UUID.randomUUID().toString());
     }
 
-    public static SetId setId() {
-
-        return factory.createSetId();
-    }
 }

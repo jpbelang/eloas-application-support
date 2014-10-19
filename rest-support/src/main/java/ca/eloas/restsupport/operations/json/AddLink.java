@@ -15,9 +15,6 @@ import javax.ws.rs.core.UriInfo;
  */
 public class AddLink implements ToMessageOperation<Object, JSONObject> {
 
-    @Inject
-    private static JSONOperationFactory factory;
-
     Provider<UriInfo> builderProvider;
 
     private final String target;
@@ -25,16 +22,16 @@ public class AddLink implements ToMessageOperation<Object, JSONObject> {
 
 
     @AssistedInject
-    public AddLink( Provider<UriInfo> info, @Assisted("one") String name, @Assisted("two") String target) {
+    public AddLink(Provider<UriInfo> info, @Assisted("one") String name, @Assisted("two") String target) {
 
         this.builderProvider = info;
         this.name = name;
         this.target = target;
     }
 
-    public void run(Object object, JSONObject linkedMessage) throws Exception  {
+    public void run(Object object, JSONObject linkedMessage) throws Exception {
 
-        if ( ! linkedMessage.has("links") ) {
+        if (!linkedMessage.has("links")) {
 
             linkedMessage.put("links", new JSONArray());
         }
@@ -43,10 +40,5 @@ public class AddLink implements ToMessageOperation<Object, JSONObject> {
         link.put("name", name);
         link.put("URL", builderProvider.get().getBaseUriBuilder().path(target).build().toString());
         links.put(link);
-    }
-
-    public static AddLink addLink(String name, String target) {
-
-        return factory.createAddLink(name, target);
     }
 }

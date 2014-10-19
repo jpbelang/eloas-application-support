@@ -17,9 +17,6 @@ import java.util.List;
  */
 public class CopyToMessage implements ToMessageOperation<DBObject, JSONObject> {
 
-    @Inject
-    private static JSONOperationFactory factory;
-
     @AssistedInject
     public CopyToMessage() {
 
@@ -34,29 +31,24 @@ public class CopyToMessage implements ToMessageOperation<DBObject, JSONObject> {
         while (it.hasNext()) {
             String next = (String) it.next();
             Object field = object.get(next);
-            if ( field instanceof List) {
+            if (field instanceof List) {
 
                 continue;
             }
 
-            if ( field instanceof BSONObject ) {
+            if (field instanceof BSONObject) {
 
                 object.put(next, new BasicBSONObject());
-                run((DBObject)object.get(next), (JSONObject)field);
+                run((DBObject) object.get(next), (JSONObject) field);
                 continue;
             }
 
 
-            if ( field.getClass().isPrimitive() || field.getClass().equals(String.class) ) {
+            if (field.getClass().isPrimitive() || field.getClass().equals(String.class)) {
                 jsonObject.put(next, field);
             }
         }
 
     }
 
-
-    public static CopyToMessage copyToMessage() {
-
-        return factory.createCopyToMessage();
-    }
 }

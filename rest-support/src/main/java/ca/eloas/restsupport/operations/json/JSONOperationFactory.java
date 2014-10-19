@@ -9,10 +9,10 @@ import com.mongodb.DBCollection;
  */
 public interface JSONOperationFactory {
 
-    SelfLink createSelfLink();
-    CopyToMessage createCopyToMessage();
-    CopyToModel createCopyToModel();
-    AddLink createAddLink(@Assisted("one") String name, @Assisted("two") String target);
-    SetId createSetId();
-    MongoSave createMongoSave(@Assisted DBCollection collection);
+    SelfLink selfLink();
+    CopyToMessage copyToMessage();
+    CopyToModel copyToModel();
+    AddLink addLink(@Assisted("one") String name, @Assisted("two") String target);
+    SetId setId();
+    MongoSave mongoSave(@Assisted DBCollection collection);
 }

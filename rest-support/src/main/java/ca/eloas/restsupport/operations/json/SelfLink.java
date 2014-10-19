@@ -18,10 +18,7 @@ import javax.ws.rs.core.UriInfo;
  */
 public class SelfLink extends MethodSensitiveToMessageOperation<DBObject, JSONObject> {
 
-    @Inject
-    private static JSONOperationFactory factory;
-
-    Provider<UriInfo> builderProvider;
+    private Provider<UriInfo> builderProvider;
 
     @AssistedInject
     public SelfLink(Provider<UriInfo> info, Provider<Method> m) {
@@ -32,9 +29,9 @@ public class SelfLink extends MethodSensitiveToMessageOperation<DBObject, JSONOb
 
 
     @Override
-    protected void runForPutDeleteAndGet(DBObject object,  JSONObject linkedMessage) throws Exception {
+    protected void runForPutDeleteAndGet(DBObject object, JSONObject linkedMessage) throws Exception {
 
-        if ( ! linkedMessage.has("links") ) {
+        if (!linkedMessage.has("links")) {
 
             linkedMessage.put("links", new JSONArray());
         }
@@ -48,26 +45,21 @@ public class SelfLink extends MethodSensitiveToMessageOperation<DBObject, JSONOb
     @Override
     protected void runFofPostAndList(DBObject object, JSONObject linkedMessage) throws Exception {
 
-        if ( object == null ) {
+        if (object == null) {
 
             runForPutDeleteAndGet(object, linkedMessage);
             return;
         }
 
-        if ( ! linkedMessage.has("links") ) {
+        if (!linkedMessage.has("links")) {
 
             linkedMessage.put("links", new JSONArray());
         }
         JSONArray links = linkedMessage.getJSONArray("links");
         JSONObject link = new JSONObject();
         link.put("name", "self");
-        link.put("URL",  builderProvider.get().getRequestUriBuilder().replaceQuery(null).path((String) object.get("id")).build().toString());
+        link.put("URL", builderProvider.get().getRequestUriBuilder().replaceQuery(null).path((String) object.get("id")).build().toString());
         links.put(link);
 
-    }
-
-    public static SelfLink selfLink() {
-
-        return factory.createSelfLink();
     }
 }

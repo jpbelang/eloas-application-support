@@ -1,4 +1,4 @@
-package ca.eloas.restsupport.operations;
+package ca.eloas.restsupport.operations.model;
 
 import ca.eloas.restsupport.ObjectFactory;
 import ca.eloas.restsupport.ToMessageOperation;
@@ -8,7 +8,6 @@ import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Provider;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
@@ -16,9 +15,9 @@ import javax.ws.rs.core.UriInfo;
 /**
  * @author JP
  */
-public class AddLink implements ToMessageOperation<Object, LinkedMessage> {
+public class AddProvidedLink implements ToMessageOperation<Object, LinkedMessage> {
 
-    Provider<UriBuilder> uriBuilder;
+
     ObjectFactory objectFactory;
 
     private final String target;
@@ -26,10 +25,9 @@ public class AddLink implements ToMessageOperation<Object, LinkedMessage> {
 
 
     @AssistedInject
-    public AddLink(ObjectFactory of, @Named("base")Provider<UriBuilder> info, @Assisted("one") String name, @Assisted("two") String target) {
+    public AddProvidedLink(ObjectFactory of, @Assisted("one") String name, @Assisted("two") String target) {
 
         this.objectFactory = of;
-        this.uriBuilder = info;
         this.name = name;
         this.target = target;
     }
@@ -38,8 +36,7 @@ public class AddLink implements ToMessageOperation<Object, LinkedMessage> {
 
         Link link = objectFactory.create(Link.class);
         link.setName(name);
-        link.setURL(uriBuilder.get().path(target).build().toString());
+        link.setURL(target);
         linkedMessage.getLinks().add(link);
     }
-
 }
