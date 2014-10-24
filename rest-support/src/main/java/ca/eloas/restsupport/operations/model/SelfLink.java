@@ -51,4 +51,9 @@ public class SelfLink<MODEL extends DBObject> extends  MethodSensitiveToMessageO
         linkedMessage.getLinks().add(link);
     }
 
+    public static SelfLink boogieWoogie() {
+
+        return null;
+    }
+
 }
