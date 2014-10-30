@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
  */
 public class DBObjectTranslatorImplTest {
 
-    public interface Foo {
+    public interface Foo extends ca.eloas.modelsupport.DBObject {
 
         int getInteger();
         void setInteger(int a);
@@ -26,7 +26,7 @@ public class DBObjectTranslatorImplTest {
         DBObjectTranslatorImpl tr = new DBObjectTranslatorImpl();
         DBObject o = BasicDBObjectBuilder.start("integer", 3).get();
 
-        Foo f = tr.toObject(Foo.class, o);
+        Foo f = tr.toDomainObject(Foo.class, o);
         assertThat(f.getInteger(), is(equalTo(3)));
     }
 }

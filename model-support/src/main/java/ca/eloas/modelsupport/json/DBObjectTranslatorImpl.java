@@ -5,19 +5,17 @@ import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 import com.google.web.bindery.autobean.shared.AutoBeanUtils;
 import com.google.web.bindery.autobean.shared.Splittable;
 import com.google.web.bindery.autobean.vm.AutoBeanFactorySource;
-import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
-import org.bson.types.ObjectId;
 
 
 /**
  * @author JP
  */
-public class DBObjectTranslatorImpl implements DBObjectTranslator {
+public class DBObjectTranslatorImpl implements ObjectTranslator<DBObject> {
 
     @Override
-    public DBObject toDBObject(Object o) {
+    public DBObject toDBObject(ca.eloas.modelsupport.DBObject o) {
 
         AutoBean ab = AutoBeanUtils.getAutoBean(o);
         Splittable s = AutoBeanCodex.encode(ab);
@@ -28,24 +26,15 @@ public class DBObjectTranslatorImpl implements DBObjectTranslator {
     }
 
     @Override
-    public <T> T toObject(Class<T> type, DBObject dbObject) {
+    public <T extends ca.eloas.modelsupport.DBObject> T toDomainObject(Class<T> type, DBObject dbObject) {
 
-        if ( dbObject == null ) {
+        if (dbObject == null) {
 
             return null;
         }
 
-        AutoBean<T> t =  AutoBeanCodex.decode(AutoBeanFactorySource.create(DBObjectAutoBeanFactory.class), type, dbObject.toString());
+        AutoBean<T> t = AutoBeanCodex.decode(AutoBeanFactorySource.create(DBObjectAutoBeanFactory.class), type, dbObject.toString());
         t.setTag("id", dbObject.get("_id"));
         return t.as();
     }
-
-    @Override
-    public <T extends MongoDBObject> T createObject(Class<T> type) {
-
-        AutoBean<T> t =  AutoBeanFactorySource.create(DBObjectAutoBeanFactory.class).create(type);
-//        t.setTag("id", new ObjectId(t.as().stableId().asString()));
-        return t.as();
-    }
-
 }
