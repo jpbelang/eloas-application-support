@@ -1,12 +1,12 @@
 package ca.eloas.modelsupport.json;
 
 import ca.eloas.modelsupport.DBObject;
+import ca.eloas.modelsupport.ObjectTranslator;
 import com.google.web.bindery.autobean.shared.AutoBean;
 import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 import com.google.web.bindery.autobean.shared.AutoBeanUtils;
 import com.google.web.bindery.autobean.shared.Splittable;
 import com.google.web.bindery.autobean.vm.AutoBeanFactorySource;
-import com.mongodb.util.JSON;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,29 +14,31 @@ import org.json.JSONObject;
  * @author JP
  */
 public class OrientTranslatorImpl implements ObjectTranslator<String> {
-    @Override
-    public String toDBObject(DBObject o) {
-        AutoBean ab = AutoBeanUtils.getAutoBean(o);
-        Splittable s = AutoBeanCodex.encode(ab);
 
-        return s.getPayload();
-    }
 
     @Override
-    public <T extends DBObject> T toDomainObject(Class<T> type, String dbObject) {
-        if (dbObject == null) {
+    public <T extends DBObject> T fromTwoToOne(Class<T> type, String stringObject) {
+        if (stringObject == null) {
 
             return null;
         }
 
         try {
-            JSONObject jo = new JSONObject(dbObject);
-            AutoBean<T> t = AutoBeanCodex.decode(AutoBeanFactorySource.create(OrientAutoBeanFactory.class), type, dbObject);
+            JSONObject jo = new JSONObject(stringObject);
+            AutoBean<T> t = (AutoBean<T>) AutoBeanCodex.decode(AutoBeanFactorySource.create(OrientAutoBeanFactory.class), type, stringObject);
             t.setTag("id", jo.getString("@rid"));
             return t.as();
         } catch (JSONException e) {
 
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public <T extends String> T fromOneToTwo(Class<T> type, DBObject dbObject) {
+        AutoBean ab = AutoBeanUtils.getAutoBean(dbObject);
+        Splittable spl = AutoBeanCodex.encode(ab);
+
+        return (T) spl.getPayload();
     }
 }
