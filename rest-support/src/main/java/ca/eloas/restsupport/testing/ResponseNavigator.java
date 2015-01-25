@@ -36,14 +36,19 @@ public class ResponseNavigator {
 
     public <T> T extractMessage(Class<T> cls, ClientResponse cr) {
 
-        return null;
-        //return objectFactory.toDomainObject(cls, cr.getEntity(JSONObject.class));
+        return (T) objectFactory.fromExternalToDomain(cls, cr.getEntity(JSONObject.class));
     }
 
-    public JSONObject extractJSON(Object message) {
 
-        return null;
-        //return objectFactory.(message);
+
+    public URLNavigator follow(String linkName) throws MalformedURLException {
+
+        LinkedMessage lm = extractMessage(LinkedMessage.class, resp);
+        URL link = findLink(lm, linkName);
+
+        return new URLNavigator(cookie, resp.getClient(), link);
+
+
     }
 
     public ResponseNavigator click(String name) throws MalformedURLException, URISyntaxException {

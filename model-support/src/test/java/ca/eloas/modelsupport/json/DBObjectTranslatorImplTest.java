@@ -26,7 +26,7 @@ public class DBObjectTranslatorImplTest {
         DBObjectTranslatorImpl tr = new DBObjectTranslatorImpl();
         DBObject o = BasicDBObjectBuilder.start("integer", 3).get();
 
-        Foo f = tr.fromTwoToOne(Foo.class, o);
+        Foo f = tr.fromExternalToDomain(Foo.class, o);
         assertThat(f.getInteger(), is(equalTo(3)));
     }
 }

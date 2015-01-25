@@ -3,9 +3,9 @@ package ca.eloas.modelsupport;
 /**
  * @author JP
  */
-public interface Translator<ONE, TWO> {
+public interface Translator<DOMAIN, EXTERNAL> {
 
-    <T extends ONE> T fromTwoToOne(Class<T> type, TWO two);
-    <T extends TWO> T fromOneToTwo(Class<T> type, ONE one);
+    <T extends DOMAIN> T fromExternalToDomain(Class<T> type, EXTERNAL two);
+    <T extends EXTERNAL> T fromDomainToExternal(Class<T> type, DOMAIN one);
 
 }

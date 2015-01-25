@@ -37,19 +37,6 @@ public class ClientResponseMatcher {
         };
     }
 
-/*
-    public static Matcher<ClientResponse> globalCookie(final Matcher<Object> matcher) {
-
-        return new FeatureMatcher<ClientResponse, NewCookie>(matcher, "response global cookie", "global cookie") {
-
-            @Override
-            protected NewCookie featureValueOf(ClientResponse actual) {
-                return globalSessionCookie(actual.getCookies());
-            }
-        };
-    }
-*/
-
     public static Matcher<ClientResponse> isOK() {
 
         return new TypeSafeMatcher<ClientResponse>() {

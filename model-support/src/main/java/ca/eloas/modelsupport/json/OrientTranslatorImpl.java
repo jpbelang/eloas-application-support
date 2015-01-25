@@ -17,7 +17,7 @@ public class OrientTranslatorImpl implements ObjectTranslator<String> {
 
 
     @Override
-    public <T extends DBObject> T fromTwoToOne(Class<T> type, String stringObject) {
+    public <T extends DBObject> T fromExternalToDomain(Class<T> type, String stringObject) {
         if (stringObject == null) {
 
             return null;
@@ -25,7 +25,7 @@ public class OrientTranslatorImpl implements ObjectTranslator<String> {
 
         try {
             JSONObject jo = new JSONObject(stringObject);
-            AutoBean<T> t = (AutoBean<T>) AutoBeanCodex.decode(AutoBeanFactorySource.create(OrientAutoBeanFactory.class), type, stringObject);
+            AutoBean<T> t = AutoBeanCodex.decode(AutoBeanFactorySource.create(OrientAutoBeanFactory.class), type, stringObject);
             t.setTag("id", jo.getString("@rid"));
             return t.as();
         } catch (JSONException e) {
@@ -35,7 +35,7 @@ public class OrientTranslatorImpl implements ObjectTranslator<String> {
     }
 
     @Override
-    public <T extends String> T fromOneToTwo(Class<T> type, DBObject dbObject) {
+    public <T extends String> T fromDomainToExternal(Class<T> type, DBObject dbObject) {
         AutoBean ab = AutoBeanUtils.getAutoBean(dbObject);
         Splittable spl = AutoBeanCodex.encode(ab);
 

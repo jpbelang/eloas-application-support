@@ -17,7 +17,7 @@ public class DBObjectTranslatorImpl implements ObjectTranslator<DBObject> {
 
 
     @Override
-    public <T extends ca.eloas.modelsupport.DBObject> T fromTwoToOne(Class<T> type, DBObject dbObject) {
+    public <T extends ca.eloas.modelsupport.DBObject> T fromExternalToDomain(Class<T> type, DBObject dbObject) {
         if (dbObject == null) {
 
             return null;
@@ -29,7 +29,7 @@ public class DBObjectTranslatorImpl implements ObjectTranslator<DBObject> {
     }
 
     @Override
-    public <T extends DBObject> T fromOneToTwo(Class<T> type, ca.eloas.modelsupport.DBObject dbObject) {
+    public <T extends DBObject> T fromDomainToExternal(Class<T> type, ca.eloas.modelsupport.DBObject dbObject) {
         AutoBean ab = AutoBeanUtils.getAutoBean(dbObject);
         Splittable s = AutoBeanCodex.encode(ab);
 
