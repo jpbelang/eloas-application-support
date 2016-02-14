@@ -60,8 +60,6 @@
         <module>js/jquery-json</module>
         <module>js/jquery-bbq</module>
         <module>js/enter</module>
-
-
     </modules>
 
 </project>
